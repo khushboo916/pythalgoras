@@ -29,3 +29,40 @@ def fourthview(request):
      analyze data, recognize patterns, and make informed decisions.
     """
     return HttpResponse(myhtml)
+def fifthview(request):
+    context = {'name':'khushboo'}
+    return render(request, 'MyApp/introduction_to_ai.html',context)
+
+
+def simplecalculator_v1_view(request):
+    result = None
+    num1, num2, operation = None, None, None
+    
+    if request.method == "POST":
+        if "reset" in request.POST:  # If reset button is clicked
+            return render(request, "MyApp/simplecalculator_v1.html")  # Reload empty form
+        
+        try:
+            num1 = float(request.POST.get("num1"))
+            num2 = float(request.POST.get("num2"))
+            operation = request.POST.get("operation")
+            
+            if operation == "+":
+                result = num1 + num2
+            elif operation == "-":
+                result = num1 - num2
+            elif operation == "*":
+                result = num1 * num2
+            elif operation == "/":
+                if num2 != 0:
+                    result = num1 / num2
+                else:
+                    result = "Error: Division by zero"
+        except ValueError:
+            result = "Error: Invalid input"
+    
+    context = {"result": result, "num1": num1, "num2": num2, "operation": operation}
+    return render(request, "MyApp/simplecalculator_v1.html", context)
+
+
+
