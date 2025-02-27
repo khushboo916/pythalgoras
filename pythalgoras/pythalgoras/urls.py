@@ -19,7 +19,10 @@ from django.urls import path
 from pythalgoras.views import firstfunction
 from django.urls import include 
 urlpatterns = [
+    path('', include('users.urls')),
     path('admin/', admin.site.urls),
     path('hello/', firstfunction),
     path('MyApp/',include("MyApp.urls")),
+    path("profiles/", include("profiles.urls")),
+
 ]
